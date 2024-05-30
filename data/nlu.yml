@@ -1,6 +1,32 @@
 version: "3.1"
 
 nlu:
+- intent: introduction
+  examples: |
+    - my name is [Daniel]{name}
+    - I am [Elizabeth]{name}
+
+- intent: vent
+  examples: |
+    - I had an awful day today
+    - I am feeling terrible
+    - I am so mad
+
+- intent: cry
+  examples: |
+    - I want to cry
+    - I am so sad
+    - I am depressed
+
+- intent: pet
+  examples: |
+    - pet pet
+    - head rub
+    - belly rub
+    - handshake
+    - nose pat
+    - I am petting your head
+
 - intent: greet
   examples: |
     - hey
