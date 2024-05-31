@@ -24,10 +24,12 @@ intents:
 
 responses:
 
+  utter_iamabear:
+  - text: "I am a happy bear!"
 
   utter_greet:
- # - text: "Hey! How are you?"
-  - text: "Hey, {name}. How is your day going?"
+  - text: "Hey! How are you?"
+  - text: "Hey. How is your day going?"
 
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
@@ -48,17 +50,9 @@ responses:
   utter_ask_name:
   - text: "What is your name?"
 
-  utter_ask_age:
-  - text: "What is your age?"
+ 
 
 slots:
-  age:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: from_text
-      
-
   name:
     type: text
     influence_conversation: false
