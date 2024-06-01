@@ -29,3 +29,12 @@ stories:
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
+
+- story: angry path 1
+  steps:
+  - intent: vent
+  - action: utter_cheer_up
+  - intent: thank
+  - action: utter_did_that_help
+  - intent: affirm
+  - intent: utter_happy

@@ -3,9 +3,20 @@ version: "3.1"
 nlu:
 - intent: introduction
   examples: |
-    - my name is Daniel
+    - my name is [Daniel](name)
+    - I am [Elizabeth](name)
 
+- intent: thank
+  examples: |
+    - Thanks bear bear, I feel better now
+    - Thx
+    - Thanks
+    - Thank you
+    - I know I can always count on you, friend
+    - You are a real one
+    - Danke
 
+    
 - intent: vent
   examples: |
     - I had an awful day today
@@ -115,3 +126,9 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+
+- intent: out_of_scope
+  examples: |
+    - Explain theory of general relativity to me
+    - Set alarm for 5 minutes
+    - Which stock should I invest in?
