@@ -1,0 +1,82 @@
+version: "3.1"
+
+### TO DO ###
+
+# responses - things assisstant says to users
+# intents - categories of things users can say
+# slots - variables remembered over course of conversation
+# entities - piece of info extracted from incoming text
+# forms/actions - add app logic and extend assistant capabilities
+
+# todo : vent / cry / pet
+intents:
+  - introduction
+  - greet
+  - vent
+  - cry
+  - pet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - thank
+  - out_of_scope
+
+responses:
+
+  utter_iamabear:
+  - text: "I am a happy bear!"
+  - text: "Bear bear!"
+
+  utter_greet:
+  - text: "Hey! How are you?"
+  - text: "Hey. How is your day going?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+  - text: "Oh no that is terrible!"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+  - text: "Do you feel better now?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+  - text: "Awesome!"
+  - text: "Let's go!"
+
+  utter_goodbye:
+  - text: "Bye"
+  - text: "Bye bye"
+  - text: "See you later"
+  - text: "I will be waiting (smile)"
+
+
+  utter_iamabot:
+  - text: "I am a happy bear with AI capabilities!"
+
+  utter_ask_name:
+  - text: "What is your name?"
+
+  utter_out_of_scope:
+  - text: Sorry, I can't handle that request.
+
+  utter_please_rephrase:
+  - text: I'm sorry, I didn't quite understand that. Could you rephrase?
+
+entities:
+  - name
+
+slots:
+  name:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
