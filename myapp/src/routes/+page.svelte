@@ -1,10 +1,11 @@
 <script>
 	import Chat from '../lib/Scheduler.svelte';
 	import BouncingDots from '../lib/BouncingDots.svelte'  
+	import Header from "../components/Header.svelte"
 </script>
 
 <main>
-	<Chat />
+
 </main> 
 
 <style>
@@ -13,7 +14,7 @@
 	}
 	
 	main {
-		width: 500px;
-		margin: 50px auto;
+		width: auto;
+		margin: auto 50px;
 	} 
 </style>

@@ -57,6 +57,7 @@ declare module '$env/static/private' {
 	export const WORKSPACEKIT_WRAP_NETNS: string;
 	export const GRADLE_HOME: string;
 	export const VSCODE_GIT_ASKPASS_MAIN: string;
+	export const PS1: string;
 	export const NIX_PROFILES: string;
 	export const VSCODE_GIT_ASKPASS_NODE: string;
 	export const MAVEN_HOME: string;
@@ -108,6 +109,7 @@ declare module '$env/static/private' {
 	export const GP_EXTERNAL_BROWSER: string;
 	export const GITPOD_INSTANCE_ID: string;
 	export const LANG: string;
+	export const VIRTUAL_ENV_PROMPT: string;
 	export const PYTHONUSERBASE: string;
 	export const LS_COLORS: string;
 	export const VSCODE_GIT_IPC_HANDLE: string;
@@ -128,6 +130,7 @@ declare module '$env/static/private' {
 	export const NIX_SSL_CERT_FILE: string;
 	export const GITPOD_ANALYTICS_SEGMENT_ENDPOINT: string;
 	export const rvm_version: string;
+	export const VIRTUAL_ENV: string;
 	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 	export const npm_config_globalconfig: string;
 	export const npm_config_init_module: string;
@@ -135,8 +138,8 @@ declare module '$env/static/private' {
 	export const JAVA_HOME: string;
 	export const TRIGGER_REBUILD: string;
 	export const PWD: string;
-	export const GEM_PATH: string;
 	export const GRADLE_USER_HOME: string;
+	export const GEM_PATH: string;
 	export const npm_execpath: string;
 	export const CARGO_HOME: string;
 	export const GITPOD_WORKSPACE_CLASS: string;
@@ -222,6 +225,7 @@ declare module '$env/dynamic/private' {
 		WORKSPACEKIT_WRAP_NETNS: string;
 		GRADLE_HOME: string;
 		VSCODE_GIT_ASKPASS_MAIN: string;
+		PS1: string;
 		NIX_PROFILES: string;
 		VSCODE_GIT_ASKPASS_NODE: string;
 		MAVEN_HOME: string;
@@ -273,6 +277,7 @@ declare module '$env/dynamic/private' {
 		GP_EXTERNAL_BROWSER: string;
 		GITPOD_INSTANCE_ID: string;
 		LANG: string;
+		VIRTUAL_ENV_PROMPT: string;
 		PYTHONUSERBASE: string;
 		LS_COLORS: string;
 		VSCODE_GIT_IPC_HANDLE: string;
@@ -293,6 +298,7 @@ declare module '$env/dynamic/private' {
 		NIX_SSL_CERT_FILE: string;
 		GITPOD_ANALYTICS_SEGMENT_ENDPOINT: string;
 		rvm_version: string;
+		VIRTUAL_ENV: string;
 		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 		npm_config_globalconfig: string;
 		npm_config_init_module: string;
@@ -300,8 +306,8 @@ declare module '$env/dynamic/private' {
 		JAVA_HOME: string;
 		TRIGGER_REBUILD: string;
 		PWD: string;
-		GEM_PATH: string;
 		GRADLE_USER_HOME: string;
+		GEM_PATH: string;
 		npm_execpath: string;
 		CARGO_HOME: string;
 		GITPOD_WORKSPACE_CLASS: string;
