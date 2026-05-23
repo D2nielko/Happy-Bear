@@ -13,7 +13,9 @@
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
+		"@types/better-sqlite3": "^7.6.13",
 		"@types/eslint": "^8.56.7",
+		"@types/uuid": "^10.0.0",
 		"autoprefixer": "^10.4.19",
 		"eslint": "^9.0.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -26,5 +28,10 @@
 		"tailwindcss": "^3.4.4",
 		"vite": "^5.0.3"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@anthropic-ai/sdk": "^0.98.0",
+		"better-sqlite3": "^12.10.0",
+		"uuid": "^14.0.0"
+	}
 }
