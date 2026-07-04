@@ -269,7 +269,17 @@ function countHintsSinceProblem(history: TurnRow[]): number {
 
 const ASKED_FOR_ANSWER =
 	/\b(just tell me|tell me the answer|what'?s the answer|give me the answer|i give up)\b/i;
-const ANSWER_TOKEN = /-?\d+\s+\d+\s*\/\s*\d+|-?\d+\s*\/\s*\d+|-?\d*\.\d+|-?\d+/;
+const ANSWER_TOKEN = /-?\d+\s+\d+\s*\/\s*\d+|-?\d+\s*\/\s*\d+|-?\d*\.\d+|-?\d+/g;
+
+// Learners often restate the problem ("1/4 + 1/2 = 3/4"), so the first
+// number in the message is usually the problem, not the answer. Prefer the
+// token right after an '='; otherwise take the last one.
+function extractAnswerToken(text: string): string | undefined {
+	const afterEquals = text.match(/=\s*(-?\d+\s+\d+\s*\/\s*\d+|-?\d+\s*\/\s*\d+|-?\d*\.\d+|-?\d+)/);
+	if (afterEquals) return afterEquals[1];
+	const all = [...text.matchAll(ANSWER_TOKEN)];
+	return all.at(-1)?.[0];
+}
 
 // Summary of the incoming learner turn relative to the open problem. The
 // misconception tag carries over from the previous tutor turn's check_math,
@@ -284,7 +294,7 @@ function summarizeLastExchange(
 	let answeredCorrectly: boolean | null = null;
 	let misconceptionTag: string | null = null;
 
-	const token = learnerText.match(ANSWER_TOKEN)?.[0];
+	const token = extractAnswerToken(learnerText);
 	if (openProblem && token) {
 		const problemExpr = openProblem.prompt.match(/-?\d+\s*\/\s*\d+\s*[+-]\s*-?\d+\s*\/\s*\d+/)?.[0];
 		const r = checkFractionAnswer(problemExpr ?? openProblem.answer, token);

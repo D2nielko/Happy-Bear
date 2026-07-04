@@ -116,8 +116,10 @@ describe('5-turn fractions tutoring exchange (mock LLM)', () => {
 		expect(t4.move).toMatchObject({ move: 'PROBE' });
 		expect(t4.text).toContain('what is 1/2 + 1/3');
 
-		// T5: correct answer against the open problem -> PRACTICE, mastery advances
-		const t5 = await drive(deps, 's1', 'It is 5/6!');
+		// T5: correct answer against the open problem -> PRACTICE, mastery
+		// advances. The learner restates the problem before answering — the
+		// pre-check must judge the token after '=', not the first number.
+		const t5 = await drive(deps, 's1', 'I did it: 1/2 + 1/3 = 5/6!');
 		expect(t5.move).toMatchObject({ move: 'PRACTICE' });
 		const mastery = listMastery(db, 'kid')[0];
 		expect(mastery.card.reps).toBe(2);
