@@ -82,12 +82,10 @@ export async function* runTurn(
 		openProblem ? { prompt: openProblem.prompt, answer: openProblem.answer } : null
 	);
 	const messages: Anthropic.MessageParam[] = [
-		...history.slice(-HISTORY_TURNS).map(
-			(t): Anthropic.MessageParam => ({
-				role: t.role === 'learner' ? 'user' : 'assistant',
-				content: t.content
-			})
-		),
+		...history.slice(-HISTORY_TURNS).map((t): Anthropic.MessageParam => ({
+			role: t.role === 'learner' ? 'user' : 'assistant',
+			content: t.content
+		})),
 		{ role: 'user', content: input.learnerText }
 	];
 
