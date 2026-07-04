@@ -117,9 +117,9 @@ interface TtsEngine { id: string; isAvailable(): boolean;
 ### Pedagogy packaging decision
 `myapp/src/lib/pedagogy/` subtree, **not** a pnpm workspace package. Reasons: pnpm is
 not installed here and the repo is npm-locked; a single consumer app gains nothing
-from a workspace split; framework-freedom is enforced instead by (a) an ESLint
-`no-restricted-imports` rule on `svelte*`/`$app`/`$env` inside that directory and
-(b) its vitest suite running in plain Node with no SvelteKit plugin.
+from a workspace split; framework-freedom is enforced instead by a dedicated
+guard test (`framework-free.test.ts` scans every non-test module's imports) and
+by the vitest suite running in plain Node with no SvelteKit plugin (D2).
 
 ## 4. Storage Schema (Drizzle + SQLite)
 
@@ -164,6 +164,7 @@ block, shorter first sentence enforced by persona prompt.
 | `mathjs` | `Fraction`-based exact arithmetic for the `check_math` verifier |
 | `vitest` (dev) | Test runner for pedagogy/tools/policy + mocked-LLM integration test |
 | `typescript` + `svelte-check` (dev) | Real type gate in CI (repo previously had none) |
+| `typescript-eslint` (dev) | eslint could not parse `lang="ts"` svelte blocks; lint gate was broken without it |
 
 No other runtime deps. No analytics, no telemetry; transcripts go only to the
 Anthropic API and local SQLite.
@@ -196,6 +197,22 @@ a real interface — swapping in a model-based checker is a drop-in.
 ## 9. Decision Log (append-only)
 
 - D1 (initial): architecture as above.
+- D2: pedagogy framework-freedom enforced by a guard test instead of an ESLint
+  rule — the repo's eslint didn't parse TS when the rule was designed, and the
+  guard test also catches DB/SDK imports.
+- D3: policy inputs (`TurnSummary`, `hintsThisProblem`, open problem) are
+  derived from persisted turns + tool-call records, not from extra LLM calls:
+  the "problem on the table" is the last `make_quiz_item`; the learner's answer
+  is pre-checked server-side against it with the same `checkFractionAnswer`
+  used by the tool; misconception tags carry over from the previous tutor
+  turn's `check_math`/`log_misconception` calls.
+- D4: between problems the active skill falls back to the latest open
+  misconception's skill (or the sole tracked skill) so the policy doesn't
+  reset to DIAGNOSE mid-conversation.
+- D5: REVIEW only targets skills still in the 'high' band; an overdue decayed
+  skill is re-taught via PRACTICE instead of quick-reviewed.
+- D6: the turn endpoint streams SSE from a POST body (fetch-reader on the
+  client) rather than EventSource, so the learner text rides the same request.
 
 ## 10. Milestone Plan
 
