@@ -7,7 +7,12 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"db:generate": "drizzle-kit generate",
+		"db:migrate": "drizzle-kit migrate"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
@@ -17,6 +22,7 @@
 		"@types/eslint": "^8.56.7",
 		"@types/uuid": "^10.0.0",
 		"autoprefixer": "^10.4.19",
+		"drizzle-kit": "^0.31.10",
 		"eslint": "^9.0.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",
@@ -25,13 +31,19 @@
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
 		"svelte": "^4.2.7",
+		"svelte-check": "^4.7.1",
 		"tailwindcss": "^3.4.4",
-		"vite": "^5.0.3"
+		"typescript": "^6.0.3",
+		"vite": "^5.0.3",
+		"vitest": "^4.1.9"
 	},
 	"type": "module",
 	"dependencies": {
 		"@anthropic-ai/sdk": "^0.98.0",
 		"better-sqlite3": "^12.10.0",
+		"drizzle-orm": "^0.45.2",
+		"mathjs": "^15.2.0",
+		"ts-fsrs": "^5.4.1",
 		"uuid": "^14.0.0"
 	}
 }
