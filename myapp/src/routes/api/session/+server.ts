@@ -1,7 +1,12 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { v4 as uuidv4 } from 'uuid';
-import { createSession, getSession, updateSessionActivity, getTotalInteractions } from '$lib/server/db.js';
+import {
+	createSession,
+	getSession,
+	updateSessionActivity,
+	getTotalInteractions
+} from '$lib/server/db.js';
 
 export const GET: RequestHandler = async ({ cookies }) => {
 	let sessionId = cookies.get('happy_bear_session');

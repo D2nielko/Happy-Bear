@@ -4,7 +4,13 @@
 	import TeddyBear from '$lib/components/TeddyBear.svelte';
 	import ChatPanel from '$lib/components/ChatPanel.svelte';
 	import EmotionOverlay from '$lib/components/EmotionOverlay.svelte';
-	import { messages, bearEmotion, sessionId, displayName, totalInteractions } from '$lib/stores/chat.js';
+	import {
+		messages,
+		bearEmotion,
+		sessionId,
+		displayName,
+		totalInteractions
+	} from '$lib/stores/chat.js';
 	import type { InteractionType, BearEmotion } from '$lib/types.js';
 
 	let initialized = false;
@@ -23,11 +29,15 @@
 			// If new session, have the bear greet
 			if (session.isNew) {
 				setTimeout(() => {
-					messages.update(msgs => [...msgs, {
-						role: 'assistant',
-						content: "Hi there! I'm Happy Bear! I'm so happy to meet you! What's your name? Bear bear!",
-						emotion: 'excited'
-					}]);
+					messages.update((msgs) => [
+						...msgs,
+						{
+							role: 'assistant',
+							content:
+								"Hi there! I'm Happy Bear! I'm so happy to meet you! What's your name? Bear bear!",
+							emotion: 'excited'
+						}
+					]);
 					bearEmotion.set('excited');
 					setTimeout(() => bearEmotion.set('idle'), 4000);
 				}, 500);
@@ -50,13 +60,17 @@
 
 			if (!res.ok) throw new Error('Interaction failed');
 
-			const data: { text: string; emotion: BearEmotion; totalInteractions: number } = await res.json();
+			const data: { text: string; emotion: BearEmotion; totalInteractions: number } =
+				await res.json();
 
-			messages.update(msgs => [...msgs, {
-				role: 'assistant',
-				content: data.text,
-				emotion: data.emotion
-			}]);
+			messages.update((msgs) => [
+				...msgs,
+				{
+					role: 'assistant',
+					content: data.text,
+					emotion: data.emotion
+				}
+			]);
 
 			bearEmotion.set(data.emotion);
 			totalInteractions.set(data.totalInteractions);
@@ -84,7 +98,9 @@
 			</div>
 		</div>
 	{:else}
-		<main class="flex-1 flex flex-col lg:flex-row gap-4 lg:gap-6 p-4 lg:p-6 max-w-6xl mx-auto w-full">
+		<main
+			class="flex-1 flex flex-col lg:flex-row gap-4 lg:gap-6 p-4 lg:p-6 max-w-6xl mx-auto w-full"
+		>
 			<!-- Bear section -->
 			<div class="lg:w-2/5 flex flex-col items-center justify-center relative">
 				<div class="relative w-full max-w-sm">

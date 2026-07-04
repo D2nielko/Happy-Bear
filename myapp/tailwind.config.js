@@ -31,9 +31,9 @@ export default {
 				poppins: ['Poppins', 'sans-serif']
 			},
 			animation: {
-				'breathe': 'breathe 3s ease-in-out infinite',
+				breathe: 'breathe 3s ease-in-out infinite',
 				'bounce-gentle': 'bounceGentle 0.6s ease-in-out',
-				'wiggle': 'wiggle 0.5s ease-in-out',
+				wiggle: 'wiggle 0.5s ease-in-out',
 				'float-up': 'floatUp 1.5s ease-out forwards',
 				'pulse-soft': 'pulseSoft 2s ease-in-out infinite'
 			},

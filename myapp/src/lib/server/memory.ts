@@ -12,7 +12,6 @@ interface ExtractedFact {
  */
 export function extractFacts(message: string): ExtractedFact[] {
 	const facts: ExtractedFact[] = [];
-	const lower = message.toLowerCase();
 
 	// Name patterns
 	const namePatterns = [
@@ -27,7 +26,29 @@ export function extractFacts(message: string): ExtractedFact[] {
 		if (match) {
 			// Filter out common non-name words
 			const word = match[1];
-			const nonNames = ['doing', 'good', 'fine', 'great', 'okay', 'ok', 'well', 'happy', 'sad', 'tired', 'not', 'so', 'very', 'really', 'just', 'feeling', 'a', 'the', 'here', 'back', 'sorry'];
+			const nonNames = [
+				'doing',
+				'good',
+				'fine',
+				'great',
+				'okay',
+				'ok',
+				'well',
+				'happy',
+				'sad',
+				'tired',
+				'not',
+				'so',
+				'very',
+				'really',
+				'just',
+				'feeling',
+				'a',
+				'the',
+				'here',
+				'back',
+				'sorry'
+			];
 			if (!nonNames.includes(word.toLowerCase())) {
 				facts.push({ factType: 'identity', factKey: 'name', factValue: word });
 				break;
@@ -36,7 +57,8 @@ export function extractFacts(message: string): ExtractedFact[] {
 	}
 
 	// Age
-	const ageMatch = message.match(/i(?:'m| am) (\d{1,3}) years? old/i) || message.match(/my age is (\d{1,3})/i);
+	const ageMatch =
+		message.match(/i(?:'m| am) (\d{1,3}) years? old/i) || message.match(/my age is (\d{1,3})/i);
 	if (ageMatch) {
 		facts.push({ factType: 'identity', factKey: 'age', factValue: ageMatch[1] });
 	}
@@ -53,7 +75,11 @@ export function extractFacts(message: string): ExtractedFact[] {
 		const match = message.match(regex);
 		if (match) {
 			if (key === 'favorite_$1') {
-				facts.push({ factType: 'preference', factKey: `favorite_${match[1].toLowerCase()}`, factValue: match[2].trim() });
+				facts.push({
+					factType: 'preference',
+					factKey: `favorite_${match[1].toLowerCase()}`,
+					factValue: match[2].trim()
+				});
 			} else {
 				facts.push({ factType: 'preference', factKey: key, factValue: match[1].trim() });
 			}
@@ -61,27 +87,48 @@ export function extractFacts(message: string): ExtractedFact[] {
 	}
 
 	// Job/occupation
-	const jobMatch = message.match(/i (?:work as|am) an? ([^.!?]+?)(?:\.|!|\?|$)/i) ||
+	const jobMatch =
+		message.match(/i (?:work as|am) an? ([^.!?]+?)(?:\.|!|\?|$)/i) ||
 		message.match(/my job is ([^.!?]+)/i) ||
 		message.match(/i'm an? ([^.!?,]+?)(?:,|\.|!|\?|$)/i);
 	if (jobMatch) {
 		const job = jobMatch[1].trim();
-		const jobWords = ['teacher', 'doctor', 'nurse', 'engineer', 'developer', 'designer', 'student', 'artist', 'writer', 'chef', 'musician', 'programmer', 'scientist', 'lawyer'];
-		if (jobWords.some(w => job.toLowerCase().includes(w))) {
+		const jobWords = [
+			'teacher',
+			'doctor',
+			'nurse',
+			'engineer',
+			'developer',
+			'designer',
+			'student',
+			'artist',
+			'writer',
+			'chef',
+			'musician',
+			'programmer',
+			'scientist',
+			'lawyer'
+		];
+		if (jobWords.some((w) => job.toLowerCase().includes(w))) {
 			facts.push({ factType: 'identity', factKey: 'occupation', factValue: job });
 		}
 	}
 
 	// Pet
-	const petMatch = message.match(/i have an? (\w+) (?:named|called) (\w+)/i) ||
+	const petMatch =
+		message.match(/i have an? (\w+) (?:named|called) (\w+)/i) ||
 		message.match(/my (\w+)(?:'s| is) (?:named|called) (\w+)/i);
 	if (petMatch) {
-		facts.push({ factType: 'life', factKey: `pet_${petMatch[1].toLowerCase()}`, factValue: petMatch[2] });
+		facts.push({
+			factType: 'life',
+			factKey: `pet_${petMatch[1].toLowerCase()}`,
+			factValue: petMatch[2]
+		});
 	}
 
 	// Location
-	const locationMatch = message.match(/i live in ([^.!?]+)/i) ||
-		message.match(/i'm from ([^.!?]+)/i);
+	const locationMatch =
+		message.match(/i live in ([^.!?]+)/i) || message.match(/i'm from ([^.!?]+)/i);
 	if (locationMatch) {
 		facts.push({ factType: 'identity', factKey: 'location', factValue: locationMatch[1].trim() });
 	}

@@ -50,11 +50,16 @@
 
 	function getBodyClass(emotion: string) {
 		switch (emotion) {
-			case 'excited': return 'animate-bounce-gentle';
-			case 'happy': return 'animate-wiggle';
-			case 'hugged': return 'bear-hug';
-			case 'sleepy': return 'bear-sleepy';
-			default: return 'animate-breathe';
+			case 'excited':
+				return 'animate-bounce-gentle';
+			case 'happy':
+				return 'animate-wiggle';
+			case 'hugged':
+				return 'bear-hug';
+			case 'sleepy':
+				return 'bear-sleepy';
+			default:
+				return 'animate-breathe';
 		}
 	}
 
@@ -99,8 +104,20 @@
 		<!-- Eyes -->
 		{#if eyeStyle.type === 'crescent'}
 			<!-- Happy closed eyes -->
-			<path d="M 130,140 Q 137,130 144,140" stroke="#5C4033" stroke-width="3" fill="none" stroke-linecap="round" />
-			<path d="M 176,140 Q 183,130 190,140" stroke="#5C4033" stroke-width="3" fill="none" stroke-linecap="round" />
+			<path
+				d="M 130,140 Q 137,130 144,140"
+				stroke="#5C4033"
+				stroke-width="3"
+				fill="none"
+				stroke-linecap="round"
+			/>
+			<path
+				d="M 176,140 Q 183,130 190,140"
+				stroke="#5C4033"
+				stroke-width="3"
+				fill="none"
+				stroke-linecap="round"
+			/>
 		{:else if eyeStyle.type === 'sad'}
 			<!-- Sad eyes -->
 			<circle cx="137" cy="138" r="5" fill="#5C4033" />
@@ -126,14 +143,31 @@
 		{/if}
 
 		<!-- Blush -->
-		<circle cx="120" cy="158" r="12" fill="#FFB6C1" opacity={blushOpacity} class="transition-opacity duration-500" />
-		<circle cx="200" cy="158" r="12" fill="#FFB6C1" opacity={blushOpacity} class="transition-opacity duration-500" />
+		<circle
+			cx="120"
+			cy="158"
+			r="12"
+			fill="#FFB6C1"
+			opacity={blushOpacity}
+			class="transition-opacity duration-500"
+		/>
+		<circle
+			cx="200"
+			cy="158"
+			r="12"
+			fill="#FFB6C1"
+			opacity={blushOpacity}
+			class="transition-opacity duration-500"
+		/>
 
 		<!-- Nose - clickable for boop -->
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<ellipse
-			cx="160" cy="168" rx="12" ry="9"
+			cx="160"
+			cy="168"
+			rx="12"
+			ry="9"
 			fill="#5C4033"
 			class="cursor-pointer hover:fill-bear-dark transition-colors"
 			on:click|stopPropagation={() => handleInteraction('nose_boop')}
@@ -142,7 +176,14 @@
 		<ellipse cx="157" cy="165" rx="4" ry="3" fill="#7D5A3C" opacity="0.5" />
 
 		<!-- Mouth -->
-		<path d={mouthPath} stroke="#5C4033" stroke-width="2.5" fill="none" stroke-linecap="round" class="transition-all duration-300" />
+		<path
+			d={mouthPath}
+			stroke="#5C4033"
+			stroke-width="2.5"
+			fill="none"
+			stroke-linecap="round"
+			class="transition-all duration-300"
+		/>
 
 		<!-- Body - clickable for hug -->
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -160,21 +201,47 @@
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<circle
-			cx="160" cy="280" r="20"
+			cx="160"
+			cy="280"
+			r="20"
 			fill="transparent"
 			class="cursor-pointer"
 			on:click|stopPropagation={() => handleInteraction('belly_rub')}
 		/>
 		<!-- Belly swirl -->
-		<path d="M 155,275 Q 160,265 165,275 Q 160,285 155,275" stroke="#C4935A" stroke-width="1.5" fill="none" opacity="0.4" />
+		<path
+			d="M 155,275 Q 160,265 165,275 Q 160,285 155,275"
+			stroke="#C4935A"
+			stroke-width="1.5"
+			fill="none"
+			opacity="0.4"
+		/>
 
 		<!-- Left arm -->
-		<ellipse cx="80" cy="260" rx="30" ry="45" fill="#D4A564" stroke="#B8903F" stroke-width="2" transform="rotate(-15, 80, 260)" />
+		<ellipse
+			cx="80"
+			cy="260"
+			rx="30"
+			ry="45"
+			fill="#D4A564"
+			stroke="#B8903F"
+			stroke-width="2"
+			transform="rotate(-15, 80, 260)"
+		/>
 		<!-- Left paw pad -->
 		<ellipse cx="75" cy="285" rx="15" ry="12" fill="#E8C99B" transform="rotate(-15, 75, 285)" />
 
 		<!-- Right arm -->
-		<ellipse cx="240" cy="260" rx="30" ry="45" fill="#D4A564" stroke="#B8903F" stroke-width="2" transform="rotate(15, 240, 260)" />
+		<ellipse
+			cx="240"
+			cy="260"
+			rx="30"
+			ry="45"
+			fill="#D4A564"
+			stroke="#B8903F"
+			stroke-width="2"
+			transform="rotate(15, 240, 260)"
+		/>
 		<!-- Right paw pad -->
 		<ellipse cx="245" cy="285" rx="15" ry="12" fill="#E8C99B" transform="rotate(15, 245, 285)" />
 
@@ -186,8 +253,12 @@
 	</svg>
 
 	<!-- Interaction hint labels -->
-	<div class="absolute top-[15%] left-1/2 -translate-x-1/2 opacity-0 hover:opacity-100 transition-opacity pointer-events-none">
-		<span class="bg-bear-dark/70 text-white text-xs px-2 py-1 rounded-full font-poppins">Pat my head!</span>
+	<div
+		class="absolute top-[15%] left-1/2 -translate-x-1/2 opacity-0 hover:opacity-100 transition-opacity pointer-events-none"
+	>
+		<span class="bg-bear-dark/70 text-white text-xs px-2 py-1 rounded-full font-poppins"
+			>Pat my head!</span
+		>
 	</div>
 </div>
 
@@ -205,13 +276,25 @@
 	}
 
 	@keyframes hug {
-		0%, 100% { transform: scale(1); }
-		50% { transform: scale(1.05); }
+		0%,
+		100% {
+			transform: scale(1);
+		}
+		50% {
+			transform: scale(1.05);
+		}
 	}
 
 	@keyframes sway {
-		0%, 100% { transform: rotate(0deg); }
-		25% { transform: rotate(-2deg); }
-		75% { transform: rotate(2deg); }
+		0%,
+		100% {
+			transform: rotate(0deg);
+		}
+		25% {
+			transform: rotate(-2deg);
+		}
+		75% {
+			transform: rotate(2deg);
+		}
 	}
 </style>

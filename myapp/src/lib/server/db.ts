@@ -62,12 +62,14 @@ export function createSession(id: string): void {
 }
 
 export function getSession(id: string) {
-	return getDb().prepare('SELECT * FROM sessions WHERE id = ?').get(id) as {
-		id: string;
-		display_name: string | null;
-		created_at: string;
-		last_active_at: string;
-	} | undefined;
+	return getDb().prepare('SELECT * FROM sessions WHERE id = ?').get(id) as
+		| {
+				id: string;
+				display_name: string | null;
+				created_at: string;
+				last_active_at: string;
+		  }
+		| undefined;
 }
 
 export function updateSessionActivity(id: string): void {
@@ -79,16 +81,24 @@ export function updateSessionName(id: string, name: string): void {
 }
 
 // Message helpers
-export function saveMessage(sessionId: string, role: 'user' | 'assistant', content: string, emotion?: string): void {
-	getDb().prepare(
-		'INSERT INTO messages (session_id, role, content, emotion) VALUES (?, ?, ?, ?)'
-	).run(sessionId, role, content, emotion ?? null);
+export function saveMessage(
+	sessionId: string,
+	role: 'user' | 'assistant',
+	content: string,
+	emotion?: string
+): void {
+	getDb()
+		.prepare('INSERT INTO messages (session_id, role, content, emotion) VALUES (?, ?, ?, ?)')
+		.run(sessionId, role, content, emotion ?? null);
 }
 
 export function getRecentMessages(sessionId: string, limit = 20) {
-	return getDb().prepare(
-		'SELECT role, content, emotion, created_at FROM messages WHERE session_id = ? ORDER BY created_at DESC LIMIT ?'
-	).all(sessionId, limit).reverse() as Array<{
+	return getDb()
+		.prepare(
+			'SELECT role, content, emotion, created_at FROM messages WHERE session_id = ? ORDER BY created_at DESC LIMIT ?'
+		)
+		.all(sessionId, limit)
+		.reverse() as Array<{
 		role: 'user' | 'assistant';
 		content: string;
 		emotion: string | null;
@@ -97,19 +107,26 @@ export function getRecentMessages(sessionId: string, limit = 20) {
 }
 
 // Fact helpers
-export function upsertFact(sessionId: string, factType: string, factKey: string, factValue: string): void {
-	getDb().prepare(
-		`INSERT INTO user_facts (session_id, fact_type, fact_key, fact_value)
+export function upsertFact(
+	sessionId: string,
+	factType: string,
+	factKey: string,
+	factValue: string
+): void {
+	getDb()
+		.prepare(
+			`INSERT INTO user_facts (session_id, fact_type, fact_key, fact_value)
 		 VALUES (?, ?, ?, ?)
 		 ON CONFLICT(session_id, fact_type, fact_key)
 		 DO UPDATE SET fact_value = excluded.fact_value, extracted_at = datetime('now')`
-	).run(sessionId, factType, factKey, factValue);
+		)
+		.run(sessionId, factType, factKey, factValue);
 }
 
 export function getFacts(sessionId: string) {
-	return getDb().prepare(
-		'SELECT fact_type, fact_key, fact_value FROM user_facts WHERE session_id = ?'
-	).all(sessionId) as Array<{
+	return getDb()
+		.prepare('SELECT fact_type, fact_key, fact_value FROM user_facts WHERE session_id = ?')
+		.all(sessionId) as Array<{
 		fact_type: string;
 		fact_key: string;
 		fact_value: string;
@@ -118,27 +135,29 @@ export function getFacts(sessionId: string) {
 
 // Interaction helpers
 export function logInteraction(sessionId: string, interactionType: string): void {
-	getDb().prepare(
-		'INSERT INTO interactions (session_id, interaction_type) VALUES (?, ?)'
-	).run(sessionId, interactionType);
+	getDb()
+		.prepare('INSERT INTO interactions (session_id, interaction_type) VALUES (?, ?)')
+		.run(sessionId, interactionType);
 }
 
 export function getInteractionCount(sessionId: string, interactionType?: string): number {
 	if (interactionType) {
-		const row = getDb().prepare(
-			'SELECT COUNT(*) as count FROM interactions WHERE session_id = ? AND interaction_type = ?'
-		).get(sessionId, interactionType) as { count: number };
+		const row = getDb()
+			.prepare(
+				'SELECT COUNT(*) as count FROM interactions WHERE session_id = ? AND interaction_type = ?'
+			)
+			.get(sessionId, interactionType) as { count: number };
 		return row.count;
 	}
-	const row = getDb().prepare(
-		'SELECT COUNT(*) as count FROM interactions WHERE session_id = ?'
-	).get(sessionId) as { count: number };
+	const row = getDb()
+		.prepare('SELECT COUNT(*) as count FROM interactions WHERE session_id = ?')
+		.get(sessionId) as { count: number };
 	return row.count;
 }
 
 export function getTotalInteractions(sessionId: string): number {
-	const row = getDb().prepare(
-		'SELECT COUNT(*) as count FROM interactions WHERE session_id = ?'
-	).get(sessionId) as { count: number };
+	const row = getDb()
+		.prepare('SELECT COUNT(*) as count FROM interactions WHERE session_id = ?')
+		.get(sessionId) as { count: number };
 	return row.count;
 }
