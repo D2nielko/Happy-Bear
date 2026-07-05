@@ -9,8 +9,8 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"test": "vitest run",
-		"test:watch": "vitest",
+		"test": "svelte-kit sync && vitest run",
+		"test:watch": "svelte-kit sync && vitest",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate"
 	},
