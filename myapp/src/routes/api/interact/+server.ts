@@ -1,6 +1,12 @@
 import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { getSession, logInteraction, getInteractionCount, saveMessage, getTotalInteractions } from '$lib/server/db.js';
+import {
+	getSession,
+	logInteraction,
+	getInteractionCount,
+	saveMessage,
+	getTotalInteractions
+} from '$lib/server/db.js';
 import { getInteractionResponse } from '$lib/server/claude.js';
 
 const VALID_INTERACTIONS = ['pat_head', 'hug', 'belly_rub', 'nose_boop'];

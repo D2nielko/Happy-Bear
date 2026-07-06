@@ -1,17 +1,27 @@
 <script lang="ts">
 	import { totalInteractions, displayName } from '$lib/stores/chat.js';
 
-	$: level = $totalInteractions < 10 ? 'New Friend'
-		: $totalInteractions < 30 ? 'Good Friend'
-		: $totalInteractions < 75 ? 'Best Friend'
-		: $totalInteractions < 150 ? 'Bear Bestie'
-		: 'Soulmate';
+	$: level =
+		$totalInteractions < 10
+			? 'New Friend'
+			: $totalInteractions < 30
+				? 'Good Friend'
+				: $totalInteractions < 75
+					? 'Best Friend'
+					: $totalInteractions < 150
+						? 'Bear Bestie'
+						: 'Soulmate';
 
-	$: levelEmoji = $totalInteractions < 10 ? '🧸'
-		: $totalInteractions < 30 ? '💛'
-		: $totalInteractions < 75 ? '🌟'
-		: $totalInteractions < 150 ? '✨'
-		: '💖';
+	$: levelEmoji =
+		$totalInteractions < 10
+			? '🧸'
+			: $totalInteractions < 30
+				? '💛'
+				: $totalInteractions < 75
+					? '🌟'
+					: $totalInteractions < 150
+						? '✨'
+						: '💖';
 </script>
 
 <header class="w-full bg-white/40 backdrop-blur-sm border-b border-bear-tan/20 px-6 py-3">

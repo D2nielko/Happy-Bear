@@ -3,21 +3,23 @@
 @tailwind utilities;
 
 :root {
-	--bear-cream: #FFF8E7;
-	--bear-light: #F5E6C8;
-	--bear-tan: #D4A574;
-	--bear-brown: #8B6914;
-	--bear-dark: #5C4033;
+	--bear-cream: #fff8e7;
+	--bear-light: #f5e6c8;
+	--bear-tan: #d4a574;
+	--bear-brown: #8b6914;
+	--bear-dark: #5c4033;
 }
 
 body {
 	font-family: 'Poppins', sans-serif;
-	background: linear-gradient(135deg, #FFF8E7 0%, #F5E6C8 50%, #FFE4A8 100%);
+	background: linear-gradient(135deg, #fff8e7 0%, #f5e6c8 50%, #ffe4a8 100%);
 	min-height: 100vh;
 	margin: 0;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
 	font-family: 'Comfortaa', cursive;
 }
 
@@ -31,10 +33,10 @@ h1, h2, h3 {
 }
 
 .chat-scroll::-webkit-scrollbar-thumb {
-	background: #D4A574;
+	background: #d4a574;
 	border-radius: 3px;
 }
 
 .chat-scroll::-webkit-scrollbar-thumb:hover {
-	background: #8B6914;
+	background: #8b6914;
 }

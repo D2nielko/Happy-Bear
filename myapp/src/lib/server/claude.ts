@@ -73,7 +73,10 @@ export async function chat(
 		let rawText = response.content[0].type === 'text' ? response.content[0].text : '';
 
 		// Strip markdown code fences (Haiku sometimes wraps JSON in ```json ... ```)
-		rawText = rawText.replace(/^```(?:json)?\s*\n?/i, '').replace(/\n?```\s*$/i, '').trim();
+		rawText = rawText
+			.replace(/^```(?:json)?\s*\n?/i, '')
+			.replace(/\n?```\s*$/i, '')
+			.trim();
 
 		// Parse JSON response
 		try {

@@ -21,7 +21,9 @@
 	}
 
 	@keyframes bounce {
-		0%, 60%, 100% {
+		0%,
+		60%,
+		100% {
 			transform: translateY(0);
 		}
 		30% {

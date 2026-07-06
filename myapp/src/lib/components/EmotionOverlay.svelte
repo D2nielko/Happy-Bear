@@ -44,7 +44,7 @@
 		particles = [...particles, particle];
 		// Remove after animation
 		setTimeout(() => {
-			particles = particles.filter(p => p.id !== particle.id);
+			particles = particles.filter((p) => p.id !== particle.id);
 		}, 1500);
 	}
 
