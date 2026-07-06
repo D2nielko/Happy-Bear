@@ -81,16 +81,21 @@ npm run db:generate  # regenerate Drizzle migrations after schema changes
 
 ## Deployment
 
-The app is deployed as a static/SSR build served through **AWS CloudFront**
-for fast, globally distributed delivery.
+**Not deployed — the app is local-first today.** There is no hosting config
+in this repo, and the app cannot be served as a static bundle: it has
+SvelteKit server routes (streaming SSE, tool execution) and a local SQLite
+database. All Anthropic API calls run in those server routes; the API key
+lives in server-side env (`$env/dynamic/private`) and is never part of the
+client bundle.
 
-```bash
-cd myapp
-npm run build
-```
+The documented path to hosting it (architecture.md §4):
 
-Build output is published to an S3 origin and served via the CloudFront
-distribution. Configure your S3 bucket and CloudFront distribution, then
-upload the build artifacts and invalidate the cache on each release. Note
-the tutor requires a server runtime (SSR + SQLite); swap the driver per
-architecture.md §4 before hosting it beyond a single machine.
+1. Swap `@sveltejs/adapter-auto` for `adapter-node` and run the Node server
+   on a host with a persistent disk, or
+2. for serverless, replace the better-sqlite3 driver with `@libsql/client`
+   (Turso) or `drizzle-orm/postgres-js`, then deploy the SSR build to any
+   Node-capable platform. A CDN such as CloudFront can front the server
+   origin for static assets, but it cannot replace it.
+
+Either way, revisit architecture.md §8 A6 first: the parent view is
+unauthenticated and must not ship to a public host as-is.
