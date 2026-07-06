@@ -1,38 +1,29 @@
-# create-svelte
+# myapp — Happy Bear SvelteKit app
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+The SvelteKit application for Happy Bear. Repo-level docs live in
+[../README.md](../README.md); the design contract is
+[../architecture.md](../architecture.md).
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Scripts
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+npm run dev          # dev server (reads .env)
+npm test             # svelte-kit sync + vitest run
+npm run lint         # prettier --check + eslint
+npm run check        # svelte-kit sync + svelte-check
+npm run build        # production build
+npm run db:generate  # drizzle-kit generate (after editing src/lib/server/tutor/schema.ts)
 ```
 
-## Building
+## Layout
 
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- `src/lib/pedagogy/` — framework-free tutoring core: skills, FSRS mastery,
+  dialogue policy, fraction verifier. No Svelte/SvelteKit/DB imports
+  (guard-tested).
+- `src/lib/server/tutor/` — Drizzle schema + repos, persona.md, prompt
+  builder, LLM client, tools, safety hook, streaming turn loop.
+- `src/lib/voice/` — STT/TTS interfaces, Web Speech implementations, server
+  stubs.
+- `src/routes/` — `/` companion, `/tutor`, `/parent`, `api/tutor/*` (SSE
+  turn endpoint), legacy `api/chat|session|interact`.
+- `drizzle/` — generated migrations (checked in). `data/` — local SQLite.
