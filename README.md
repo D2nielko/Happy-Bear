@@ -12,6 +12,7 @@ stubbed.
 ## Features
 
 ### Tutor (`/tutor`)
+
 - **Dialogue policy, not vibes** — every reply is constrained to an explicit
   move (DIAGNOSE, HINT, PROBE, EXPLAIN, PRACTICE, REVIEW) chosen by a pure
   state machine. EXPLAIN is gated: the bear scaffolds with hints first and
@@ -25,6 +26,7 @@ stubbed.
   never depends on voice.
 
 ### Safety & parent view (`/parent`)
+
 - Guardrails in every system prompt plus an output-check hook that screens
   each sentence before it is shown or spoken; blocked content is replaced
   and the turn is flagged.
@@ -33,6 +35,7 @@ stubbed.
   the Anthropic API and the local database.
 
 ### Companion (`/`)
+
 - The original Happy Bear: emotion-aware chat, an animated bear that reacts
   to pats and hugs, and gentle coaching that remembers what you share.
 
