@@ -213,6 +213,11 @@ a real interface — swapping in a model-based checker is a drop-in.
   skill is re-taught via PRACTICE instead of quick-reviewed.
 - D6: the turn endpoint streams SSE from a POST body (fetch-reader on the
   client) rather than EventSource, so the learner text rides the same request.
+- D7: companion page gains a 3D bear (`Bear3D.svelte`, procedural Three.js —
+  no AI-generated/GLB assets, no rigging pipeline) alongside the SVG bear
+  behind a 2D/3D toggle. Same `interact` event contract and `/api/interact`
+  flow; limbs are pivoted groups animated on pat/hug/boop/belly-rub clicks.
+  Additive to the legacy companion mode; tutor pages untouched.
 
 ## 10. Milestone Plan
 

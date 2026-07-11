@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import Header from '$lib/components/Header.svelte';
 	import TeddyBear from '$lib/components/TeddyBear.svelte';
+	import Bear3D from '$lib/components/Bear3D.svelte';
 	import ChatPanel from '$lib/components/ChatPanel.svelte';
 	import EmotionOverlay from '$lib/components/EmotionOverlay.svelte';
 	import {
@@ -14,6 +15,7 @@
 	import type { InteractionType, BearEmotion } from '$lib/types.js';
 
 	let initialized = false;
+	let use3d = true;
 
 	onMount(async () => {
 		try {
@@ -105,11 +107,21 @@
 			<div class="lg:w-2/5 flex flex-col items-center justify-center relative">
 				<div class="relative w-full max-w-sm">
 					<EmotionOverlay />
-					<TeddyBear on:interact={handleInteraction} />
+					{#if use3d}
+						<Bear3D on:interact={handleInteraction} />
+					{:else}
+						<TeddyBear on:interact={handleInteraction} />
+					{/if}
 					<div class="text-center mt-2">
 						<p class="font-poppins text-xs text-bear-brown/40">
 							Click the bear to interact! Try its head, belly, or nose
 						</p>
+						<button
+							class="mt-1 font-poppins text-xs text-bear-brown/60 underline decoration-dotted hover:text-bear-brown"
+							on:click={() => (use3d = !use3d)}
+						>
+							Switch to {use3d ? '2D' : '3D'} bear
+						</button>
 					</div>
 				</div>
 			</div>
