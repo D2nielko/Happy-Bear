@@ -87,6 +87,15 @@
 			nose.position.set(0, -0.08, 0.88);
 			nose.userData.zone = 'nose_boop';
 			headGroup.add(nose);
+			// Invisible pick target: the drawn nose is too small to click comfortably,
+			// so boops register anywhere over the muzzle front.
+			const noseHit = new THREE.Mesh(
+				new THREE.SphereGeometry(0.3, 16, 12),
+				new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false })
+			);
+			noseHit.position.set(0, -0.12, 0.82);
+			noseHit.userData.zone = 'nose_boop';
+			headGroup.add(noseHit);
 
 			// Ears (own pivots so they can wiggle)
 			const ears: THREE_NS.Group[] = [];
@@ -194,7 +203,10 @@
 				if (zone) handleZoneClick(zone, clock.getElapsedTime());
 			};
 			const onMove = (e: PointerEvent) => {
-				renderer.domElement.style.cursor = zoneAt(e) ? 'pointer' : 'default';
+				const zone = zoneAt(e);
+				renderer.domElement.style.cursor = zone ? 'pointer' : 'default';
+				// Exposed so tests can assert which zone a pixel maps to.
+				renderer.domElement.dataset.zone = zone ?? '';
 			};
 			renderer.domElement.addEventListener('pointerdown', onClick);
 			renderer.domElement.addEventListener('pointermove', onMove);
